@@ -7,6 +7,7 @@ ll n,m,num,k,a,b,c,d,sum=0;
 const ll NE=400010;
 string ss,s;
 char cc;
+vector<vector<int>> ls(NE);
 struct node
 {
     ll a,b;
@@ -42,10 +43,53 @@ void slove(){
     }
     sort(h.begin(),h.end(),cmp);
     
-    int ans=h[0].b + h[1].b;
+    ll ans=h[0].b + h[1].b;
 
-    map<int,int> 
+    map<int,int> mp;
+    for (int i = 0; i < n; i++)
+    {
+        for (auto x:ls[h[i].a])
+        {
+            if(mp[x]>0){
+                ans=0;
+            }
+            mp[x]++;
+        }
+    }
+    //检查加一的
     
+    for (int i = 0; i < n; i++)
+    {
+        for (auto x:ls[h[i].a]){
+            mp[x]--;
+        }
+        
+        for(auto x:ls[h[i].a+1]){
+            if(mp[x]>0){
+                ans=min(ans,h[i].b);
+            }
+        }
+
+        for(auto x:ls[h[i].a]){
+            mp[x]++;
+        }
+    }
+
+    //使用最小的链接
+    ll val = h[0].a;
+    ll cost = h[0].b;
+    for (int i = 1; i < n; i++)
+    {
+        for (auto x:ls[h[i].a])
+        {
+            ll num = x-(val%x);
+            if(num == x){
+                num=0;
+            }
+            ans = min(1ll*ans,1ll*num*cost);
+        }
+    }
+    cout << ans << endl;
 }
 
 int main(){
