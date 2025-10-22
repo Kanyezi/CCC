@@ -10,6 +10,7 @@ char cc;
 
 void slove() {
   cin >> n;
+  //set<int> 去重复
   set<int> ls;
   for (int i = 0; i < n; i++) {
     cin >> num;
