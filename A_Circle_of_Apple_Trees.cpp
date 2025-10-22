@@ -8,6 +8,7 @@ const int NE=10000;
 string ss,s;
 char cc;
 
+//12
 void slove(){
     cin >> n;
     set<int> ls;
